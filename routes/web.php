@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('gui.index');
 });
+
+Route::get('/Registro', 'UserController@signup')->name('gui.signup'); 
