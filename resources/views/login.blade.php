@@ -49,10 +49,9 @@
                                 <i lass="fas fa-envelope"></i>
                             </span>  
                         </div>
+                        
                        <div style="margin-left: 30%;"> 
-                       <form action = "{{ route('gui.signup')}}" method = "POST">
-                        <input class="button is-outlined is-small is-success " value="Crear Una cuenta" name="btnCrearUser" type="submit">
-                       </form> 
+                        <a href="{{ route ('signup') }}"class="button is-outlined is-small is-success "> Crear cuenta </a>
                         <input class="button is-outlined is-small is-danger " value="Iniciar Sección" name="btnOk" type="submit">
                       </div> 
                    </div>

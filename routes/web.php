@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('gui.index');
-});
+//  Route::get('/', function () {
+//      return view('signup');
+//  });
 
-Route::get('/Registro', 'UserController@signup')->name('gui.signup'); 
+Route::get('/', 'CategoriaController@mostrar_categorias')->name('guardar'); 
+Route::get('/Registro', 'UserController@signup')->name('signup'); 
+Route::get('/guardar', 'UserController@guardar')->name('guardar'); 
+

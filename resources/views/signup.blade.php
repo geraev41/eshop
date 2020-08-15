@@ -1,0 +1,46 @@
+
+<?php
+    if(!isset($_GET['new'])){
+       // header ('Location: /GUI/index.php?status=Inicio sección'); 
+    }
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creando una cuenta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"/>
+
+</head>
+<body>
+    <section class="section">
+        <form method="POST" action="signup.php">
+            <div class="container">
+                <div class="columns"> 
+                    <div class="column">
+                        <div class="column is-half
+                is-offset-one-quarter">
+                             <input REQUIRED class="input is-primary" type="text" placeholder="Nombre"  name="nombre"><br><br>
+                             <input REQUIRED class="input is-primary" type="text" placeholder="Cedula"  name="cedula"><br><br>
+                             <input REQUIRED  class="input is-primary" type="text" placeholder="Correo Eletronico"  name="email"><br><br>
+                             <input REQUIRED class="input is-primary" type="text" placeholder="Télefono"  name="telefono"><br><br>
+                             <input REQUIRED class="input is-primary" type="text" placeholder="Direcion"  name="direcion"><br><br>
+                             <input REQUIRED class="input is-primary" type="text" placeholder="Nombre de usuario"  name="username"><br><br>
+                             <input REQUIRED class="input is-primary" type="password" placeholder="Contraseña"  name="pass"><br><br>
+                            <div style="margin-left: 38%">  
+                                <a href="index.php?status=Inicio sección" class="button is-small is-success">Regresar</a>
+                                <input REQUIRED class="button is-small is-danger " value="Guardar" name="btnGuardar" type="submit">
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section> 
+</body>
+</html>
+<?php
