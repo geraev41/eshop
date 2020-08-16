@@ -24,6 +24,17 @@ class CategoriaController extends Controller
 
     public function mostrar_categorias(){
         $categorias = App\Categoria::all();
-        return view('prueba', compact('categorias')); 
+        return view('admin', compact('categorias')); 
+    }
+
+    public function editar_categoria($id){
+        $cat = App\Categoria::findOrFail($id);
+        return view ('categoria', compact('cat')); 
+    }
+
+    public function eliminar_categoria($id){
+        $cat = App\Categoria::findOrFail($id);
+        $cat->delete();
+        return view('admin'); 
     }
 }

@@ -36,14 +36,13 @@
 
 </head>
 <body>
-   <form action="" method="POST"> 
     <section>
             <div id="container">    
                 <div id="divLeft">
                     <br><br>
                     <label></label>
                     <ul class="menu-list"> 
-                        <li><a id="aList" href="#divCategorias">Categorias</a> </li>
+                        <li><a id="aList" href="#divCategorias ">Categorias</a> </li>
                         <li><a id="aList" href="#divProductos" >Productos</a></li>
                         <li><a id="aList" href="#divClientes" >Clientes</a></li>
                         <li><a id="aList" href="#divGanancias" >Mis ganancias</a></li>
@@ -54,6 +53,7 @@
 
                 <div id="divRight">
                     <div id="divCategorias">
+                        <a href="{{ route('mostrar_categorias')}}">Todas las categorias</a>
                         <table class="table">
                             <tr> 
                                 <th>Nombre Categoria</th>
@@ -62,7 +62,24 @@
                                 <th>Eliminar</th>
                             </tr>
                             <tbody> 
-                                
+                               
+                                @if(!empty($categorias))
+                                    @foreach ($categorias as $c)
+                                        <tr>
+                                            <td>{{$c->nombre}}</td> 
+                                            <td><a href="#">Agregar producto</a></td>                                        
+                                            <td><a href="{{ route('editar_categoria',$c) }}">Editar</a></td>  
+                                                                                  
+                                            <td>
+                                                <form action="{{ route ('eliminar_categoria',$c)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="" type="submit">Eliminar</button>
+                                                </form>
+                                            </td>                                        
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>                          
                         </table>     
                     <a href="{{ route('crear_categoria')}}" style="margin-left:5%;" class="button is-outlined is-small is-danger ">Agregar Nueva Categoria</a><br><br>
@@ -146,6 +163,5 @@
             }
         }
     </script>
-</form>
 </body>
 </html>

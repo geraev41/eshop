@@ -11,7 +11,13 @@
 </head>
 <body>
     <section>
-    <form action="{{ route('guardar_categoria') }}" method="POST">
+        @if($url = {{ route('guardar_categoria') }}) @endif
+
+        @if(!empty($cat))
+            @if($url = {{ route('update', $cat->id) }}) @endif
+        @endif
+
+    <form action="{{ $url }}" method="POST">
         @csrf
         <div class="container">
             <div class="columns">
@@ -19,24 +25,22 @@
 
                 <div class="column is-half is-offset-one-quarter" id="idMain">
                     @if (session ('mensaje'))
-                <div class="notification is-success is-small" >
+                        <div class="notification is-success is-small" >
                             <button class="delete"></button>
                             {{ session ('mensaje')}}
                         </div>
                     @endif
                     <img style="margin-left:35%;" src="../Imagenes/category.png">
-                   <?php
-                        $btnName = "btnAddCategoria"; 
-                        $btnValue ="Guardar";
-                       
-                        $nombre = trim(isset($cat[0]->nombre)? ($cat[0]->nombre): "","");  
+                    @if($btnValue = "Guardar") @endif
+                    @if(!empty($cat))
+                        @if($btnValue = "Editar") @endif
+                    @endif
+                    @if($nombre = trim(!empty($cat->nombre)?$cat->nombre:"","")) @endif
 
-                   ?> 
                     <div class="column is-half is-offset-one-quarter">
-                        <input type="text" value="" class="input is-primary" placeholder="Nombre categoria" name="categoria"><br><br>
+                    <input type="text" value="{{$nombre}}" class="input is-primary" placeholder="Nombre categoria" name="categoria"><br><br>
                         <a href ="{{ route('admin')}}"style="margin-left:10%;"  class="button is-info d-inline" >Regresar</a>
-                        <input  style="margin-left:10%;"type="submit" class="button is-success" value="<?php echo ("$btnValue");?>">
-
+                    <input  style="margin-left:10%;"type="submit" class="button is-success" value="{{$btnValue}}">
                     </div>
                 </div>
             </div>
