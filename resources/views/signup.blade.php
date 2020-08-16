@@ -1,14 +1,5 @@
-
-<?php
-    if(!isset($_GET['new'])){
-       // header ('Location: /GUI/index.php?status=Inicio sección'); 
-    }
-?>
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +9,8 @@
 </head>
 <body>
     <section class="section">
-        <form method="POST" action="signup.php">
+    <form method="POST" action="{{ route('guardar')}}">
+        @csrf
             <div class="container">
                 <div class="columns"> 
                     <div class="column">
@@ -30,10 +22,10 @@
                              <input REQUIRED class="input is-primary" type="text" placeholder="Télefono"  name="telefono"><br><br>
                              <input REQUIRED class="input is-primary" type="text" placeholder="Direcion"  name="direcion"><br><br>
                              <input REQUIRED class="input is-primary" type="text" placeholder="Nombre de usuario"  name="username"><br><br>
-                             <input REQUIRED class="input is-primary" type="password" placeholder="Contraseña"  name="pass"><br><br>
+                             <input REQUIRED class="input is-primary" type="password" placeholder="Contraseña"  name="password"><br><br>
                             <div style="margin-left: 38%">  
-                                <a href="index.php?status=Inicio sección" class="button is-small is-success">Regresar</a>
-                                <input REQUIRED class="button is-small is-danger " value="Guardar" name="btnGuardar" type="submit">
+                                <a href="{{ route('login') }}" class="button is-small is-success">Regresar</a>
+                                <input  class="button is-small is-danger " value="Guardar" name="btnGuardar" type="submit">
                             </div> 
                         </div>
                     </div>

@@ -6,10 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <a><?php if(isset($categorias)){
-        foreach($categorias as $cat){
-            echo($cat->nombre); 
-        }   
-    }?></a>
+    @foreach ($categorias as $cat)
+        <h1> {{$cat->id}}</h1>
+    @endforeach
 </body>
 </html>

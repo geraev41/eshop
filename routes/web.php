@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//  Route::get('/', function () {
-//      return view('signup');
-//  });
+Route::get('/','UserController@index')->name('login'); 
+Route::get('/administrador','UserController@admin')->name('admin'); 
 
-Route::get('/', 'CategoriaController@mostrar_categorias')->name('guardar'); 
-Route::get('/Registro', 'UserController@signup')->name('signup'); 
-Route::get('/guardar', 'UserController@guardar')->name('guardar'); 
+Route::get('/categoria','CategoriaController@crear')->name('crear_categoria'); 
+Route::post('/','CategoriaController@guardar')->name('guardar_categoria'); 
+Route::get('/','CategoriaController@mostrar')->name('guardar_categoria'); 
+
+
+
+
+
+//Route::get('/', 'CategoriaController@mostrar_categorias')->name('guardar'); 
+Route::get('/Registro', 'UserController@registro')->name('registro_usuario'); 
+
+Route::post('/Salvar', 'UserController@guardar')->name('guardar'); 
 

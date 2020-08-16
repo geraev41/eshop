@@ -1,0 +1,97 @@
+
+#idHead{
+    width: 100%;
+    height: 10vh;
+    border: 1px solid red;
+}
+
+#divLeft{
+    float: left;
+    width: 15%; /*es 20%*/
+    height: 100vh;   
+    position: relative;
+    background-color:#333;
+    outline:1px solid  #2a2a2a;
+}
+#divRight{
+    display: flex;
+    float: left;
+    width: 35%;
+    height: 12vh; 
+}
+
+
+
+#container{
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+}
+#divProductos{
+    display: none;
+   opacity: 0.8;
+}
+
+#divProductos:target{
+    display: block;
+   opacity: 1;
+}
+
+#divCarrito{
+    display: none;
+    opacity: 0.8;
+}
+
+
+#divCarrito:target{
+    display: block; 
+    opacity: 1;
+}
+
+#divCompras{
+    display: none;
+    opacity: 0.8;
+}
+
+
+#divCompras:target{
+    display: block; 
+    opacity: 1;
+}
+
+ul{
+    /*
+        Define list-style in none, 
+        the user cannot select
+    */
+    list-style: none;
+    padding: 0px;
+    margin-top: 8px;
+    user-select: none;
+}
+
+#aList{
+   /*
+    define display, text-decoration: is none
+   */
+    color: silver;
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+}
+li{
+    /*
+    Has a transition that lasts 0.2s
+    */
+    outline:1px solid  #2a2a2a;
+    transition: border 0.2s;
+}
+
+li:hover{
+    /*
+    When the mouse is on it has a new background-color
+    and new border
+    */
+    background-color: black;
+    border-left: 4px solid rgb(54, 54, 54);
+}

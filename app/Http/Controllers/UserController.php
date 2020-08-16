@@ -7,7 +7,12 @@ use App;
 
 class UserController extends Controller
 {
-    public function signup(){
+    public function index(){
+        return view('login');
+    }
+
+
+    public function registro(){
         return view('signup'); 
     }
 
@@ -19,7 +24,22 @@ class UserController extends Controller
             'telefono'=> 'required',
             'direcion'=> 'required',
             'username'=> 'required',
+            'password'=> 'required',
         ]); 
-        $nuevoUser = App\User; 
+
+        $nuevoUser = new App\User; 
+        $nuevoUser->nombre = $request->nombre; 
+        $nuevoUser->cedula = $request->cedula; 
+        $nuevoUser->email = $request->email; 
+        $nuevoUser->telefono = $request->telefono; 
+        $nuevoUser->direcion = $request->direcion; 
+        $nuevoUser->username = $request->username; 
+        $nuevoUser->password = $request->password; 
+        $nuevoUser->tipo = "cl";
+        $nuevoUser->save(); 
+    }
+
+    public function admin(){
+        return view('admin');
     }
 }

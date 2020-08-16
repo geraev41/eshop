@@ -1,0 +1,109 @@
+
+#divLeft{
+    float: left;
+    width: 20%;
+    height: 100vh;   
+    position: relative;
+    background-color:#333;
+    outline:1px solid  #2a2a2a;
+}
+#divRight{
+    display: flex;
+    float: left;
+    width: 35%;
+    height: 12vh; 
+    margin-left: 3%;
+}
+
+
+
+#container{
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+}
+#divProductos{
+    display: none;
+   opacity: 0.8;
+}
+
+#divProductos:target{
+    display: block;
+   opacity: 1;
+}
+
+#divCategorias{
+    display: none;
+    opacity: 0.8;
+}
+
+
+#divCategorias:target{
+    display: block; 
+    opacity: 1;
+}
+
+#divClientes{
+    display: none;
+    opacity: 0.8;
+}
+
+
+#divClientes:target{
+    display: block; 
+    opacity: 1;
+}
+
+#divGanancias{
+    display: none;
+    opacity: 0.8;
+}
+
+
+#divGanancias:target{
+    display: block; 
+    opacity: 1;
+}
+
+#idBtn{
+   width: 40%;
+    top: 60vh; 
+    margin-left: 20%;
+}
+
+ul{
+    /*
+        Define list-style in none, 
+        the user cannot select
+    */
+    list-style: none;
+    padding: 0px;
+    margin-top: 8px;
+    user-select: none;
+}
+
+#aList{
+   /*
+    define display, text-decoration: is none
+   */
+    color: silver;
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+}
+li{
+    /*
+    Has a transition that lasts 0.2s
+    */
+    outline:1px solid  #2a2a2a;
+    transition: border 0.2s;
+}
+
+li:hover{
+    /*
+    When the mouse is on it has a new background-color
+    and new border
+    */
+    background-color: black;
+    border-left: 4px solid rgb(54, 54, 54);
+}

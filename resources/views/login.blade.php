@@ -1,25 +1,6 @@
 
-<?php
-    session_start();
-    $a = isset($_SESSION['existe_user'])?$_SESSION['existe_user']:false; 
-    if($_SESSION && ($a != 'is_same')){
-        include_once ('../Util/Util.php');
-        alert ("Es probable que haya iniciado una sección anteriormente,cierre sección para ingresar con nuevo usuario");
-    }elseif($_SESSION){
-        if($_SESSION && $_SESSION['user']){
-            include_once ('../Entidades/User.php'); 
-            $user = new User();
-            $user = unserialize($_SESSION['user']);
-            if($user->tipo == "cl"){
-                header('Location: /GUI/principal.php?status=principal&message=Bienvenido');
-            }elseif($user->tipo = "ad"){
-                header('Location: /GUI/admin.php?status=Inicio sección&message=Admin');
-            }
-        }
-    }
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,8 +32,8 @@
                         </div>
                         
                        <div style="margin-left: 30%;"> 
-                        <a href="{{ route ('signup') }}"class="button is-outlined is-small is-success "> Crear cuenta </a>
-                        <input class="button is-outlined is-small is-danger " value="Iniciar Sección" name="btnOk" type="submit">
+                        <a href="{{ route('registro_usuario') }}" class="button is-outlined is-small is-success "> Crear cuenta </a>
+                        <a href="{{ route('admin') }}" class="button is-outlined is-small is-danger "> Iniciar sección</a>
                       </div> 
                    </div>
                 </div>

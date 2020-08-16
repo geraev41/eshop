@@ -7,12 +7,19 @@ use App;
 
 class CategoriaController extends Controller
 {
-    public function guardar(){
+
+    public function crear(){
+        return view('categoria');
+    }
+
+    public function guardar(Request $r){
+        $r->validate([
+            'categoria'=>'required'
+        ]);
         $cat = new App\Categoria; 
-        var_dump($cat->nombre);die; 
-        $cat->nombre = "Deportes"; 
+        $cat->nombre = $r->categoria; 
         $cat->save(); 
-      //  return back()->with(''); 
+        return back()->with('mensaje','Categoria guardada con exitó'); 
     }
 
     public function mostrar_categorias(){
