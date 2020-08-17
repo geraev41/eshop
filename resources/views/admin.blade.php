@@ -135,10 +135,10 @@
                                @if (!empty($users))
                                    @foreach ($users as $u)
                                     <tr>
-                                        <td>{{$u->nombre}}</td> 
-                                        <td>{{$u->email}}</td>
-                                        <td>{{$u->telefono}}</td>
-                                        <td>{{$u->direcion}}</td>
+                                        <td>{{ $u->nombre }}</td> 
+                                        <td>{{ $u->email }}</td>
+                                        <td>{{ $u->telefono }}</td>
+                                        <td>{{ $u->direcion }}</td>
                                     <tr>
                                    @endforeach
                                @endif
