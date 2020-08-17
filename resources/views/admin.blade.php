@@ -148,9 +148,9 @@
                     <div id="divGanancias">
 
                        <strong> Sus ganancias por todas las ventas </strong>  
-                                    <?php
-                                       //ganancias
-                                    ?>
+                           <?php
+                            //ganancias
+                            ?>
                     </div>
                 </div>
             </div>
