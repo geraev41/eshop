@@ -29,12 +29,33 @@ class CategoriaController extends Controller
 
     public function editar_categoria($id){
         $cat = App\Categoria::findOrFail($id);
-        return view ('categoria', compact('cat')); 
+        return view ('categoria_editar', compact('cat')); 
+    }
+
+    public function update(Request $r, $id){
+        $notaUpdate = App\Categoria::findOrFail($id);
+        $notaUpdate->nombre = $r->categoria; 
+        $notaUpdate->save();
+        $msj = "Actualizado con exitó una categoria";
+       // return back();
+       return view('admin', compact('msj')); 
     }
 
     public function eliminar_categoria($id){
         $cat = App\Categoria::findOrFail($id);
-        $cat->delete();
-        return view('admin'); 
+        $pr = App\Producto::where('id_categoria', $id)->get();
+        $msj = "No puede eliminar categorias con productos asociados";
+        if(isset($pr[0])){
+            return view('admin', compact('msj')); 
+        }else{
+            $cat->delete();
+            $msj = "Eliminado con exitó";
+        }
+        return view('admin',compact('msj')); 
+    }
+
+    public function output(Request $r){
+        $id = intval($r->input('select'));
+        var_dump($id);die;
     }
 }

@@ -1,30 +1,4 @@
-<?php
-    session_start(); 
-    if($_SESSION && $_SESSION['user']) {
-        $user = new User();
-        $user = unserialize($_SESSION['user']);
-        if($user->tipo != "ad"){
-        }
-    }else{
-    } 
 
-    /**
-     * obtiene un mensaje del url para mostrar un mensaje
-     */
-    if(isset($_GET['message'])){ 
-        switch ($_GET['message']) {
-            case 'error prod':
-                    alert ("No puede eliminar una categoria con productos asociados");
-                break;
-            case 'eliminó':
-                alert ("Se elimino con exitó!");
-                break;
-            default:
-                # code...
-                break;
-        }
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,18 +7,25 @@
     <title>Administrador</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"/>
     <link rel="stylesheet" href="../CSS/admin.css"/>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </head>
 <body>
     <section>
             <div id="container">    
                 <div id="divLeft">
+                    @if (!empty ($msj))
+                        <div id="note"class="notification is-success" style="top:3%; height: 5%; font-size: 80%; 
+                         padding-top: 5%">
+                            {{$msj }}
+                        </div>
+                    @endif
                     <br><br>
                     <label></label>
                     <ul class="menu-list"> 
-                        <li><a id="aList" href="#divCategorias ">Categorias</a> </li>
+                        <li><a id="aList" href="/ver_categorias#divCategorias ">Categorias</a> </li>
                         <li><a id="aList" href="#divProductos" >Productos</a></li>
-                        <li><a id="aList" href="#divClientes" >Clientes</a></li>
+                        <li><a id="aList" href="/ver_clientes#divClientes" >Clientes</a></li>
                         <li><a id="aList" href="#divGanancias" >Mis ganancias</a></li>
 
                     <ul>
@@ -53,6 +34,7 @@
 
                 <div id="divRight">
                     <div id="divCategorias">
+
                         <a href="{{ route('mostrar_categorias')}}">Todas las categorias</a>
                         <table class="table">
                             <tr> 
@@ -67,7 +49,7 @@
                                     @foreach ($categorias as $c)
                                         <tr>
                                             <td>{{$c->nombre}}</td> 
-                                            <td><a href="#">Agregar producto</a></td>                                        
+                                            <td><a href="{{ route('producto',$c->id) }}">Agregar producto</a></td>                                        
                                             <td><a href="{{ route('editar_categoria',$c) }}">Editar</a></td>  
                                                                                   
                                             <td>
@@ -89,13 +71,17 @@
                         <div class="field">
                             <div class="control">
                                 <div class="select is-info ">
+                                <form method="POST" action="{{route('cargar_producto')}}">
+                                    @csrf
                                     <select name="select"  onchange="this.form.submit()">
                                         <option selected disabled>Selecione una categoria    </option>
-                                            <?php
-                                                //categorias cmbx
-                                            ?>
-
-                                    </select>  
+                                        @if (!empty($categorias))
+                                            @foreach ($categorias as $c)
+                                                <option value="{{$c->id}}">{{$c->nombre}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select> 
+                                    </form> 
                                 </div>
                             </div>
                         </div> 
@@ -112,9 +98,28 @@
                                 <th>Eliminar</th>
                             </tr>
                             <tbody>
-                                <?php
-                                    //Productos
-                                ?>
+                                @if (!empty($productos))
+                                <?php// var_dump($productos);die;?>
+
+                                    @foreach ($productos as $p)
+                                        <tr>
+                                            <td><img with="60px" height="50px" src="images/{{ $p->imagen}}"></td> 
+                                            <td>{{$p->nombre}}</td> 
+                                            <td>{{$p->descripcion}}</td>
+                                            <td>{{$p->stock}}</td> 
+                                            <td>{{$p->precio}}</td> 
+                                            <td>{{$p->vendidos}}</td> 
+                                            <td><a href="{{ route('editar_producto',$p->id)}}">Editar</a></td>  
+                                            <td>
+                                                <form action="{{ route ('eliminar_producto',$p)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="" type="submit">Eliminar</button>
+                                                </form>
+                                            </td>                                        
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table> 
                     </div>
@@ -127,9 +132,16 @@
                                 <th>Dirección</th>
                             </tr>
                             <tbody>
-                                <?php
-                                    //clientes
-                                ?>
+                               @if (!empty($users))
+                                   @foreach ($users as $u)
+                                    <tr>
+                                        <td>{{$u->nombre}}</td> 
+                                        <td>{{$u->email}}</td>
+                                        <td>{{$u->telefono}}</td>
+                                        <td>{{$u->direcion}}</td>
+                                    <tr>
+                                   @endforeach
+                               @endif
                             </tbody>
                         </table>
                     </div>
@@ -162,6 +174,9 @@
                 window.location.href= ""; 
             }
         }
+    </script>
+    <script>
+        $('#note').fadeOut(4000);
     </script>
 </body>
 </html>

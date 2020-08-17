@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,8 @@
 </head>
 <body>
     <section>
-    <form action="{{ route('guardar_categoria') }}" method="POST">
+    <form action="{{ route('update_categoria', $cat->id) }}" method="POST">
+        @method('PUT')
         @csrf
         <div class="container">
             <div class="columns">
@@ -22,10 +22,11 @@
                         </div>
                     @endif
                     <img style="margin-left:35%;" src="../Imagenes/category.png">
+
                     <div class="column is-half is-offset-one-quarter">
-                    <input type="text" class="input is-primary" placeholder="Nombre categoria" name="categoria"><br><br>
+                    <input type="text" value="{{$cat->nombre}}" class="input is-primary" placeholder="Nombre categoria" name="categoria"><br><br>
                         <a href ="{{ route('admin')}}"style="margin-left:10%;"  class="button is-info d-inline" >Regresar</a>
-                    <input  style="margin-left:10%;"type="submit" class="button is-success" value="Guardar">
+                    <input  style="margin-left:10%;"type="submit" class="button is-success" value="Editar">
                     </div>
                 </div>
             </div>
