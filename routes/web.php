@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','UserController@index')->name('login'); 
 Route::get('/ver_clientes','UserController@mostrar_clientes')->name('clientes'); 
 Route::get('/administrador','UserController@admin')->name('admin'); 
+Route::get('/principal','UserController@cliente')->name('cliente'); 
+
 
 Route::get('/categoria','CategoriaController@crear')->name('crear_categoria'); 
 Route::post('/','CategoriaController@guardar')->name('guardar_categoria'); 
@@ -35,6 +37,7 @@ Route::put('/update_producto/{id?}', 'ProductoController@update')->name('update_
 
 Route::post('/cw/{id?}', 'CategoriaController@output')->name('consola'); 
 
+Route::get('/cambios', 'CarroController@cambiar')->name('editar_carro');
 
 
 

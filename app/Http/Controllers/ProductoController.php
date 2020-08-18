@@ -38,9 +38,10 @@ class ProductoController extends Controller
     }
 
     public function mostrar_producto_x_categoria(Request $r){
+        $view= $r->view;
         $id_categoria = intval($r->input('select'));
         $productos = App\Producto::where('id_categoria', $id_categoria)->get();
-        return view ('admin', compact('productos'));
+        return view ($view, compact('productos'));
     }
 
     public function eliminar($id){
@@ -88,4 +89,6 @@ class ProductoController extends Controller
            return back()->with('msj',"El link no debe alterarlo!, por favor regrese a la página principal!"); 
        }
     }
+
+    
 }

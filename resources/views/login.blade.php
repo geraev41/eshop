@@ -32,7 +32,7 @@
                         </div>
                         
                        <div style="margin-left: 30%;"> 
-                        <a href="{{ route('registro_usuario') }}" class="button is-outlined is-small is-success "> Crear cuenta </a>
+                        <a href="{{ route('cliente') }}" class="button is-outlined is-small is-success "> Crear cuenta </a>
                         <a href="{{ route('admin') }}" class="button is-outlined is-small is-danger "> Iniciar sección</a>
                       </div> 
                    </div>

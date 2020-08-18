@@ -43,8 +43,11 @@ class UserController extends Controller
         return view('admin');
     }
 
+    public function cliente(){
+        return view('principal');
+    }
     public function mostrar_clientes(){
-        
+
         $users = App\User::where('tipo','cl')->get();
         return view('admin', compact('users')); 
     }

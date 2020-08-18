@@ -99,8 +99,6 @@
                             </tr>
                             <tbody>
                                 @if (!empty($productos))
-                                <?php// var_dump($productos);die;?>
-
                                     @foreach ($productos as $p)
                                         <tr>
                                             <td><img with="60px" height="50px" src="images/{{ $p->imagen}}"></td> 
