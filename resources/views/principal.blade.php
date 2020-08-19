@@ -12,14 +12,18 @@
     <section> 
         <div id="container">   
         <div id="divLeft"><br>
-            <label>  </label>  
+            <label> {{ Auth::user()
+            ->nombre}} </label>  
             <br>
             <ul class="menu-list"> 
                 <li><a id="aList" href="#divProductos" >Productos</a></li> 
                 <li><a id="aList" href="#divCarrito" >Mi carrito</a></li> 
                 <li><a id="aList" href="#divCompras" >Mis compras</a></li>
             <ul>
-            <input class="button is-outlined is-small is-danger is-rounded" type="submit" name="btnSalir" value="Cerrar Seción">
+            <form action="{{ route('salir')}}" method="POST"> 
+                @csrf
+            <input class="button is-outlined is-small is-danger is-rounded" type="submit" value="Salir">
+            </form>
         </div>
         <div id="divRight">
             <div id="divProductos">

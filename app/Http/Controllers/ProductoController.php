@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App; 
 class ProductoController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth'); 
+    }
+
     public function producto($id=0){
         return view('producto',compact('id'));
     }

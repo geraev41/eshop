@@ -9,7 +9,7 @@
 </head>
 <body>
     <section class="section">
-    <form method="POST" action="{{ route('guardar')}}">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
             <div class="container">
                 <div class="columns"> 

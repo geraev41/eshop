@@ -16,7 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/','UserController@index')->name('login'); 
+
+
+Route::get('/','UserController@index')->name('login')->middleware('guest'); 
+Route::get('/registro','UserController@registro')->name('registro'); 
+
+Route::post('/validar','Auth\LoginController@login')->name('validar_login'); 
+Route::post('/salir','Auth\LoginController@logout')->name('salir'); 
+
+
 Route::get('/ver_clientes','UserController@mostrar_clientes')->name('clientes'); 
 Route::get('/administrador','UserController@admin')->name('admin'); 
 Route::get('/principal','UserController@cliente')->name('cliente'); 
