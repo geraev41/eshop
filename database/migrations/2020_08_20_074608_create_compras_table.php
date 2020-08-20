@@ -18,11 +18,12 @@ class CreateComprasTable extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->string('nombre');
             $table->string('imagen');
-            $table->string('fecha_compra');
+           // $table->string('fecha_compra');
             $table->integer('cantidad');
             $table->string('descripcion');
             $table->double('precio');
             $table->double('costo');
+            $table->timestamps();
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }

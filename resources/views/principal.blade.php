@@ -127,7 +127,15 @@
         </div>
         </div>
         <div id="divCompras">
-            <h2>Sus compras realizadas</h2>
+           <div  style="margin: auto"> 
+           <form action="/ver_orde_fecha#divCompras" method="POST">
+                @csrf
+                <h2>Sus compras realizadas</h2>
+                <input type="date" name="fecha"> 
+                <input type="submit" value="buscar"> 
+            </form>
+            <a href="/ver_compras#divCompras">ver todo</a>
+           </div>
             <table class="table"  style="width:'500px';">
                 <tr> 
                     <th>Imagen</th>
@@ -139,20 +147,26 @@
                     <th>Pagó</th>
                     <th>Quitar</th> 
                     <th>Ver orden</th> 
-
                 </tr>
                 <tbody>
+                    <?php  ?>
                     @if(!empty($compras))
                         @foreach($compras as $c)
                             <tr>
                                 <td><img height='60px' width='50px'src='images/{{$c->imagen}}'/></td>
                                 <td>{{$c->nombre}}</td>
-                                <td>{{$c->fecha_compra}}</td>
+                                <td>{{$c->created_at}}</td>
                                 <td>{{$c->cantidad}}</td>
                                 <td>{{$c->descripcion}}</td>
                                 <td>₡{{$c->precio}}</td>
                                 <td>₡{{$c->costo}}</td>
-                                <td><a href =''>Quitar</a></td>
+                                <td>
+                                    <form action="{{ route('eliminar_compra',$c->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" value="Quitar">
+                                    </form>
+                                </td>
                                 <td><a href="{{ route('ver_orden', $c->id)}}"> Ver detalles</a></td>
                             </tr>
                         @endforeach

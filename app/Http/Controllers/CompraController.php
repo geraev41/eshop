@@ -27,7 +27,6 @@ class CompraController extends Controller
         $c->id_usuario = Auth::user()->id; 
         $c->nombre = $p->nombre; 
         $c->imagen = $p->imagen; 
-        $c->fecha_compra = $this->get_date();
         $c->cantidad = $car->cantidad; 
         $c->descripcion = $p->descripcion; 
         $c->precio = $p->precio;
@@ -55,4 +54,16 @@ class CompraController extends Controller
         return view('orden', compact('compra')); 
     }
 
+    public function ver_orden_x_fecha(Request $r){
+        $compras = App\Compra::whereDate('created_at', $r->fecha)->get();
+        return view('principal', compact('compras')); 
+    }
+
+    public function eliminar_compra($id=0){
+        $c = App\Compra::findOrFail($id);
+        $c->delete();
+        $msj = "Elimino con exitó la compra del registro"; 
+        return view('principal', compact('msj'));
+    }
 }
+ 

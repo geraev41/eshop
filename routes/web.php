@@ -58,6 +58,10 @@ Route::put('/update_carro/{id?}', 'CarroController@update')->name('update_carro'
 Route::get('/pagar', 'CompraController@pagar_productos')->name('pagar_compras'); 
 Route::get('/ver_compras', 'CompraController@mostrar_compras')->name('ver_compras'); 
 Route::get('/ver_orden/{id?}', 'CompraController@mostrar_orden')->name('ver_orden'); 
+Route::post('/ver_orde_fecha', 'CompraController@ver_orden_x_fecha')->name('buscar_fecha'); 
+Route::delete('/eliminar_compra/{id?}', 'CompraController@eliminar_compra')->name('eliminar_compra'); 
+
+
 
 
 
