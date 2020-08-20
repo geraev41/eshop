@@ -24,7 +24,7 @@ class CategoriaController extends Controller
 
     public function mostrar_categorias(){
         $categorias = App\Categoria::all();
-        return view('principal', compact('categorias')); 
+        return view('admin', compact('categorias')); 
     }
 
     public function editar_categoria($id){

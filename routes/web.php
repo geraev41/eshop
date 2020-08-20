@@ -55,7 +55,11 @@ Route::get('/modificar_cantidad/{id?}', 'CarroController@cambiar')->name('editar
 Route::put('/update_carro/{id?}', 'CarroController@update')->name('update_carro'); 
 
 
-Route::get('/pagar', 'CarroController@update')->name('update_carro'); 
+Route::get('/pagar', 'CompraController@pagar_productos')->name('pagar_compras'); 
+Route::get('/ver_compras', 'CompraController@mostrar_compras')->name('ver_compras'); 
+Route::get('/ver_orden/{id?}', 'CompraController@mostrar_orden')->name('ver_orden'); 
+
+
 
 
 Route::get('/Registro', 'UserController@registro')->name('registro_usuario'); 

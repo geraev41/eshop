@@ -4,30 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
+use Auth; 
 class CompraController extends Controller
 {
     
     public function pagar_productos(){
+        
         $carros = App\Carro::where('id_usuario',Auth::user()->id)->get();
-        foreach ($carros as $c) {
-          $p =  App\Producto::findOrFail($c->id_producto); 
-          guardar_compra($p,$c); 
-          $c->delete(); 
+        if(isset($carros[0])){
+            foreach ($carros as $c) {
+                $p =  App\Producto::findOrFail($c->id_producto); 
+                $this->guardar_compra($p,$c); 
+                $c->delete(); 
+            }
+        }else{
+            return redirect()->route('cliente'); 
         }
-       
     }
 
     public function guardar_compra($p, $car){
         $c = new App\Compra; 
-        $c->id_cliente = Auth::user()->id; 
+        $c->id_usuario = Auth::user()->id; 
         $c->nombre = $p->nombre; 
         $c->imagen = $p->imagen; 
-        $c->fecha_compra = get_date();
+        $c->fecha_compra = $this->get_date();
         $c->cantidad = $car->cantidad; 
         $c->descripcion = $p->descripcion; 
         $c->precio = $p->precio;
         $c->costo = $car->valor; 
         $c->save();
+        $p->stock = $p->stock - $car->cantidad; 
+        $p->vendidos = $p->vendidos + $car->cantidad; 
+        $p->save();         
     }
     
     public function get_date(){
@@ -36,6 +44,15 @@ class CompraController extends Controller
         $hora = Date(" h:i a");
         $fe = $fecha.$hora;
         return $fe;
+    }
+
+    public function mostrar_compras(){
+        $compras = App\Compra::where('id_usuario', Auth::user()->id)->get(); 
+        return view('principal', compact('compras')); 
+    }
+    public function mostrar_orden($id= 0){
+        $compra = App\Compra::findOrFail($id); 
+        return view('orden', compact('compra')); 
     }
 
 }

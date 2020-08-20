@@ -29,7 +29,10 @@
                         <li><a id="aList" href="#divGanancias" >Mis ganancias</a></li>
 
                     <ul>
-                    <a href ="../logicaDatos/logout.php"id="idBtn" class="button is-outlined is-small is-danger">Cerrar Sección<a>
+                        <form action="{{ route('salir')}}" method="POST"> 
+                            @csrf
+                        <input class="button is-outlined is-small is-danger is-rounded" type="submit" value="Salir">
+                        </form>
                 </div>
 
                 <div id="divRight">
@@ -73,6 +76,8 @@
                                 <div class="select is-info ">
                                 <form method="POST" action="{{route('cargar_producto')}}">
                                     @csrf
+                                <input type="text" name="view" value="admin" style="display: none;">
+
                                     <select name="select"  onchange="this.form.submit()">
                                         <option selected disabled>Selecione una categoria    </option>
                                         @if (!empty($categorias))

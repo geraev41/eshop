@@ -18,7 +18,7 @@
             <ul class="menu-list"> 
                 <li><a id="aList" href="#divProductos" >Productos</a></li> 
                 <li><a id="aList" href="productos_en_carro#divCarrito" >Mi carrito</a></li> 
-                <li><a id="aList" href="#divCompras" >Mis compras</a></li>
+                <li><a id="aList" href="ver_compras#divCompras" >Mis compras</a></li>
             <ul>
             <form action="{{ route('salir')}}" method="POST"> 
                 @csrf
@@ -123,7 +123,7 @@
                     ₡{{ $total}}
                 @endif
             </label>
-            <a href="{{ route('pagar')}}" style="left:4%;" class="button is-outlined is-small is-danger">Pagar</a>
+            <a href="{{ route('pagar_compras')}}" style="left:4%;" class="button is-outlined is-small is-danger">Pagar</a>
         </div>
         </div>
         <div id="divCompras">
@@ -142,17 +142,21 @@
 
                 </tr>
                 <tbody>
-                    <tr>
-                        <td><img height='60px' width='50px'src='data:/image/jpg;base64,$img'/></td>
-                        <td>$c->nombre</td>
-                        <td>$c->fecha_compra</td>
-                        <td>$c->cantidad</td>
-                        <td>$c->descripcion</td>
-                        <td>₡$c->precio</td>
-                        <td>₡$c->costo</td>
-                        <td><a href ='../logicaDatos/compraDatos.php?id_compra_delete=$c->id'>Quitar</a></td>
-                        <td><a href='orden.php?id_compra=$c->id'> Ver detalles</a></td>
-                    </tr>
+                    @if(!empty($compras))
+                        @foreach($compras as $c)
+                            <tr>
+                                <td><img height='60px' width='50px'src='images/{{$c->imagen}}'/></td>
+                                <td>{{$c->nombre}}</td>
+                                <td>{{$c->fecha_compra}}</td>
+                                <td>{{$c->cantidad}}</td>
+                                <td>{{$c->descripcion}}</td>
+                                <td>₡{{$c->precio}}</td>
+                                <td>₡{{$c->costo}}</td>
+                                <td><a href =''>Quitar</a></td>
+                                <td><a href="{{ route('ver_orden', $c->id)}}"> Ver detalles</a></td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>   
         </div>
