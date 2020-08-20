@@ -17,7 +17,7 @@
             <br>
             <ul class="menu-list"> 
                 <li><a id="aList" href="#divProductos" >Productos</a></li> 
-                <li><a id="aList" href="#divCarrito" >Mi carrito</a></li> 
+                <li><a id="aList" href="productos_en_carro#divCarrito" >Mi carrito</a></li> 
                 <li><a id="aList" href="#divCompras" >Mis compras</a></li>
             <ul>
             <form action="{{ route('salir')}}" method="POST"> 
@@ -67,7 +67,7 @@
                                 <td>{{$p->descripcion}}</td>
                                 <td>{{$p->stock}}</td> 
                                 <td>{{$p->precio}}</td> 
-                                <td><a href="#">Agregar a carrito</a></td>  
+                                <td><a href="{{ route('agregar_producto',$p->id)}}">Agregar a carrito</a></td>  
                             </tr>
                         @endforeach
                     @endif
@@ -88,21 +88,42 @@
                         <th>Confirmar Cambios</th>
                     </tr>
                     <tbody>
-                        <tr>
-                        <td>$p->nombre</td>
-                        <td>$p->descripcion</td>
-                        <td><img src='data:/image/jpg;base64,$img'/></td>
-                        <td>$p->stock</td>
-                        <td>$p->precio</td>
-                        <td> $c->cantidad</td>
-                        <td> ₡$costo</td>
-                        <td><a href=''>Descartar</a></td>
-                        <td><a href="{{ route('editar_carro')}}">Hacer cambios</a></td>
-                        </tr>
+                        @if (!empty($result))
+                            @foreach ($result['pros'] as $p)
+                                <tr>
+                                    <td>{{$p->nombre}}</td>
+                                    <td>{{$p->descripcion}}</td>
+                                    <td><img src='images/{{ $p->imagen }}'/></td>
+                                    <td>{{ $p->stock}}</td>
+                                    <td> {{ $p->precio}}</td>
+                                    @foreach ($result['carro'] as $c)
+                                        @if ($c->id_producto == $p->id)
+                                            <td> {{ $c->cantidad }}</td>
+                                            <td>₡{{ $c->valor}}</td>
+                                            <td>
+                                                <form action="{{ route('eliminar_pr_carro',$c->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="submit" value="Decartar">
+                                                </form>  
+                                            </td>
+                                            <td><a href="{{route('editar_carro',$c->id)}}">Hacer cambios</a></td>
+                                        @endif
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        @endif
                 </tbody>
              </table><br> 
-            <label>Total a pagar </label>
-            <input style="left:4%;" name="btnPagar" class="button is-outlined is-small is-danger " value="Pagar" type="submit">
+            <label>Total a pagar<?php $total = 0;?> 
+                @if(!empty($result))
+                    @foreach ($result['carro'] as $c)
+                        <?php $total = $c->valor + $total;?>
+                    @endforeach
+                    ₡{{ $total}}
+                @endif
+            </label>
+            <a href="{{ route('pagar')}}" style="left:4%;" class="button is-outlined is-small is-danger">Pagar</a>
         </div>
         </div>
         <div id="divCompras">

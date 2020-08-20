@@ -48,8 +48,14 @@ Route::put('/update_producto/{id?}', 'ProductoController@update')->name('update_
 
 Route::post('/cw/{id?}', 'CategoriaController@output')->name('consola'); 
 
-Route::get('/cambios', 'CarroController@cambiar')->name('editar_carro');
+Route::get('/agregar/{id?}', 'CarroController@guardar_producto_en_carro')->name('agregar_producto');
+Route::delete('/eliminar_de_carro/{id?}', 'CarroController@eliminar_producto_en_carro')->name('eliminar_pr_carro');
+Route::get('/productos_en_carro', 'CarroController@productos_en_carro')->name('ver_productos');
+Route::get('/modificar_cantidad/{id?}', 'CarroController@cambiar')->name('editar_carro');
+Route::put('/update_carro/{id?}', 'CarroController@update')->name('update_carro'); 
 
+
+Route::get('/pagar', 'CarroController@update')->name('update_carro'); 
 
 
 Route::get('/Registro', 'UserController@registro')->name('registro_usuario'); 

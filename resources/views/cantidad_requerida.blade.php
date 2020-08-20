@@ -8,7 +8,9 @@
    <link   rel="stylesheet" href="../CSS/cantidad.css">
 </head>
 <body>
-   <form action="" method="POST"> 
+    <form action="{{ route('update_carro', $result['carro']->id)}}" method="POST"> 
+        @csrf
+        @method('PUT')
     <section>
         <div class="container">
             <div class="columns">
@@ -17,15 +19,14 @@
                 <div class = "column is-half
                 is-offset-one-quarter">
 
-                   <label>Producto</label><br>
-                   <label>Cantidad disponible</label><br>
-                   <label>Precio por unidad </label><br><br>
-                   <input type="number" name="cantidad" min="1"  max="" value=""><br><br>
-                   <label>Costo (Sin guardar cambios) </label><br><br>
-                   <input class="button is-outlined is-small is-danger is-rounded"type="submit" value="Guardar Cambios" name="btnGuardar"><br><br>
-                   <input class="button is-outlined is-small is-danger is-rounded" type="submit" value="Regresar" name="btnRegresar"><br><br>
+                <label>Producto {{ $result['p']->nombre}}</label><br>
+                   <label>Cantidad disponible {{ $result['p']->stock}}</label><br>
+                   <label>Precio por unidad ₡{{ $result['p']->precio}}</label><br><br>
+                    <input type="number" name="cantidad" min="1"  max="{{ $result['p']->stock }}" value="{{ $result['carro']->cantidad}}"><br><br>
+                   <label>Costo (Sin guardar cambios) ₡{{ $result['carro']->valor}}</label><br><br>
+                   <input class="button is-outlined is-small is-danger is-rounded"type="submit" value="Guardar Cambios"><br><br>
+                   <a href="{{ route('cliente') }}" class="button is-outlined is-small is-danger is-rounded">Regresar</a><br><br>
                 </div>
-
                </div>
             </div>
         </div>
