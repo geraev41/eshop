@@ -23,7 +23,7 @@
                     <br><br>
                     <label></label>
                     <ul class="menu-list"> 
-                        <li><a id="aList" href="/ver_categorias#divCategorias ">Categorias</a> </li>
+                        <li><a id="aList" href="{{ route('mostrar_categorias','admin')}}#divCategorias ">Categorias</a> </li>
                         <li><a id="aList" href="#divProductos" >Productos</a></li>
                         <li><a id="aList" href="/ver_clientes#divClientes" >Clientes</a></li>
                         <li><a id="aList" href="#divGanancias" >Mis ganancias</a></li>
@@ -38,7 +38,7 @@
                 <div id="divRight">
                     <div id="divCategorias">
 
-                        <a href="{{ route('mostrar_categorias')}}">Todas las categorias</a>
+                        <a href="{{ route('mostrar_categorias','admin')}}">Todas las categorias</a>
                         <table class="table">
                             <tr> 
                                 <th>Nombre Categoria</th>
@@ -48,8 +48,8 @@
                             </tr>
                             <tbody> 
                                
-                                @if(!empty($categorias))
-                                    @foreach ($categorias as $c)
+                                @if(!empty($result['categorias']))
+                                    @foreach ($result['categorias'] as $c)
                                         <tr>
                                             <td>{{$c->nombre}}</td> 
                                             <td><a href="{{ route('producto',$c->id) }}">Agregar producto</a></td>                                        
@@ -80,8 +80,8 @@
 
                                     <select name="select"  onchange="this.form.submit()">
                                         <option selected disabled>Selecione una categoria    </option>
-                                        @if (!empty($categorias))
-                                            @foreach ($categorias as $c)
+                                        @if (!empty($result['categorias']))
+                                            @foreach ($result['categorias'] as $c)
                                                 <option value="{{$c->id}}">{{$c->nombre}}</option>
                                             @endforeach
                                         @endif
@@ -103,8 +103,8 @@
                                 <th>Eliminar</th>
                             </tr>
                             <tbody>
-                                @if (!empty($productos))
-                                    @foreach ($productos as $p)
+                                @if (!empty($result['productos']))
+                                    @foreach ($result['productos'] as $p)
                                         <tr>
                                             <td><img with="60px" height="50px" src="images/{{ $p->imagen}}"></td> 
                                             <td>{{$p->nombre}}</td> 

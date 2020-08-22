@@ -16,7 +16,7 @@
             ->nombre}} </label>  
             <br>
             <ul class="menu-list"> 
-                <li><a id="aList" href="#divProductos" >Productos</a></li> 
+                <li><a id="aList" href="ver_categorias#divProductos" >Productos</a></li> 
                 <li><a id="aList" href="productos_en_carro#divCarrito" >Mi carrito</a></li> 
                 <li><a id="aList" href="ver_compras#divCompras" >Mis compras</a></li>
             <ul>
@@ -32,14 +32,14 @@
                 <div class="field" style="margin-left:25%;">
                     <div class="control">
                         <div class="select is-info ">
-                            <form method="POST" action="{{route('cargar_producto')}}">
+                            <form method="POST" action="{{route('cargar_producto')}}#divProductos">
                                 @csrf
 
                                 <input type="text" name="view" value="principal" style="display: none;">
                             <select name="select"  onchange="this.form.submit()">
                                 <option selected disabled>Selecione una categoria</option>
-                                @if (!empty($categorias))
-                                    @foreach ($categorias as $c)
+                                @if (!empty($result['categorias']))
+                                    @foreach ($result['categorias'] as $c)
                                         <option value="{{$c->id}}">{{$c->nombre}}</option>
                                     @endforeach
                                 @endif
@@ -59,15 +59,15 @@
                     <th style='visibility: hidden;'>id</th>
                     </tr>
                     <tbody>
-                        @if (!empty($productos))
-                        @foreach ($productos as $p)
+                        @if (!empty($result['productos']))
+                        @foreach ($result['productos'] as $p)
                             <tr>
-                                <td><img with="60px" height="50px" src="images/{{ $p->imagen}}"></td> 
+                                <td><img with="60px" height="50px" src="images/{{$p->imagen}}"></td> 
                                 <td>{{$p->nombre}}</td> 
                                 <td>{{$p->descripcion}}</td>
                                 <td>{{$p->stock}}</td> 
                                 <td>{{$p->precio}}</td> 
-                                <td><a href="{{ route('agregar_producto',$p->id)}}">Agregar a carrito</a></td>  
+                                <td><a class="button is-success is-active is-small" href="{{ route('agregar_producto',$p->id)}}">Agregar a carrito</a></td>  
                             </tr>
                         @endforeach
                     @endif
@@ -88,7 +88,7 @@
                         <th>Confirmar Cambios</th>
                     </tr>
                     <tbody>
-                        @if (!empty($result))
+                        @if (!empty($result['pros']))
                             @foreach ($result['pros'] as $p)
                                 <tr>
                                     <td>{{$p->nombre}}</td>
@@ -104,10 +104,10 @@
                                                 <form action="{{ route('eliminar_pr_carro',$c->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <input type="submit" value="Decartar">
+                                                    <input class="button is-small is-danger is-active" type="submit" value="Decartar">
                                                 </form>  
                                             </td>
-                                            <td><a href="{{route('editar_carro',$c->id)}}">Hacer cambios</a></td>
+                                            <td><a class="button is-success is-active is-small" href="{{route('editar_carro',$c->id)}}">Hacer cambios</a></td>
                                         @endif
                                     @endforeach
                                 </tr>
@@ -116,7 +116,7 @@
                 </tbody>
              </table><br> 
             <label>Total a pagar<?php $total = 0;?> 
-                @if(!empty($result))
+                @if(!empty($result['carro']))
                     @foreach ($result['carro'] as $c)
                         <?php $total = $c->valor + $total;?>
                     @endforeach
@@ -131,10 +131,13 @@
            <form action="/ver_orde_fecha#divCompras" method="POST">
                 @csrf
                 <h2>Sus compras realizadas</h2>
-                <input type="date" name="fecha"> 
-                <input type="submit" value="buscar"> 
+                <input class="button is-small is-hovered" type="date" name="fecha"> 
+                <button style="background-image: url('Imagenes/search.png'); 
+                    background-repeat: no-repeat; 
+                    background-position: left center; 
+                    width:80px;"  class="button is-small is-hovered" type="submit"> buscar</button>
+                <a class="button is-small is-hovered"href="/ver_compras#divCompras">ver todo</a>
             </form>
-            <a href="/ver_compras#divCompras">ver todo</a>
            </div>
             <table class="table"  style="width:'500px';">
                 <tr> 
@@ -164,10 +167,10 @@
                                     <form action="{{ route('eliminar_compra',$c->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="submit" value="Quitar">
+                                        <input class="button is-small is-danger is-active"type="submit" value="Quitar">
                                     </form>
                                 </td>
-                                <td><a href="{{ route('ver_orden', $c->id)}}"> Ver detalles</a></td>
+                                <td><a class="button is-success is-active is-small" href="{{ route('ver_orden', $c->id)}}"> Ver detalles</a></td>
                             </tr>
                         @endforeach
                     @endif

@@ -32,7 +32,7 @@ Route::get('/principal','UserController@cliente')->name('cliente');
 
 Route::get('/categoria','CategoriaController@crear')->name('crear_categoria'); 
 Route::post('/','CategoriaController@guardar')->name('guardar_categoria'); 
-Route::get('/ver_categorias', 'CategoriaController@mostrar_categorias')->name('mostrar_categorias'); 
+Route::get('/ver_categorias/{view?}', 'CategoriaController@mostrar_categorias')->name('mostrar_categorias'); 
 Route::get('/editar_categoria/{id?}', 'CategoriaController@editar_categoria')->name('editar_categoria');
 Route::delete('/eliminar_categoria/{id?}', 'CategoriaController@eliminar_categoria')->name('eliminar_categoria'); 
 Route::put('/{id?}', 'CategoriaController@update')->name('update_categoria'); 
@@ -40,7 +40,7 @@ Route::put('/{id?}', 'CategoriaController@update')->name('update_categoria');
 
 Route::get('/producto/{id?}','ProductoController@producto')->name('producto'); 
 Route::post('/guardar_producto','ProductoController@guardar')->name('guardar_producto'); 
-Route::post('/ver_producto', 'ProductoController@mostrar_producto_x_categoria')->name('cargar_producto'); 
+Route::post('/ver_productos', 'ProductoController@mostrar_producto_x_categoria')->name('cargar_producto'); 
 Route::delete('/eliminar_producto/{id?}', 'ProductoController@eliminar')->name('eliminar_producto'); 
 Route::get('/editar_producto/{id?}', 'ProductoController@editar_producto')->name('editar_producto'); 
 Route::put('/update_producto/{id?}', 'ProductoController@update')->name('update_producto'); 

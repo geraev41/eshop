@@ -45,7 +45,9 @@ class ProductoController extends Controller
         $view= $r->view;
         $id_categoria = intval($r->input('select'));
         $productos = App\Producto::where('id_categoria', $id_categoria)->get();
-        return view ($view, compact('productos'));
+        $categorias = App\Categoria::all();
+        $result = compact('productos', 'categorias'); 
+        return view ($view, compact('result'));
     }
 
     public function eliminar($id){

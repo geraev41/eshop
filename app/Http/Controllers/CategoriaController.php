@@ -22,9 +22,10 @@ class CategoriaController extends Controller
         return back()->with('mensaje','Categoria guardada con exitó'); 
     }
 
-    public function mostrar_categorias(){
+    public function mostrar_categorias($view){
         $categorias = App\Categoria::all();
-        return view('principal', compact('categorias')); 
+        $result = compact('categorias');
+        return view($view, compact('result')); 
     }
 
     public function editar_categoria($id){
