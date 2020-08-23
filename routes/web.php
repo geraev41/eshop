@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/','UserController@index')->name('login')->middleware('guest'); 
+Route::get('/','UserController@index')->name('login'); 
 Route::get('/registro','UserController@registro')->name('registro'); 
 
 Route::post('/validar','Auth\LoginController@login')->name('validar_login'); 
@@ -27,7 +27,7 @@ Route::post('/salir','Auth\LoginController@logout')->name('salir');
 
 Route::get('/ver_clientes','UserController@mostrar_clientes')->name('clientes'); 
 Route::get('/administrador','UserController@admin')->name('admin'); 
-Route::get('/principal','UserController@cliente')->name('cliente'); 
+Route::get('/principal','UserController@cliente')->name('cliente')->middleware('cliente'); 
 
 
 Route::get('/categoria','CategoriaController@crear')->name('crear_categoria'); 
@@ -72,4 +72,4 @@ Route::post('/Salvar', 'UserController@guardar')->name('guardar');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

@@ -7,6 +7,10 @@ use App;
 use Auth; 
 class CompraController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth'); 
+    }
+
     
     public function pagar_productos(){
         

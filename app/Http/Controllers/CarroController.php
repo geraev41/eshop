@@ -7,6 +7,10 @@ use App;
 use Auth; 
 class CarroController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth'); 
+    }
+
     public function cambiar($id= 0){
         if($id<1){
             return redirect()->route('cliente');
