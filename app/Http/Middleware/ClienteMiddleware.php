@@ -18,7 +18,7 @@ class ClienteMiddleware
         if(Auth::check() && Auth::user()->tipo == "cl"){
             return $next($request);
         }
-        return route('login');
+        return redirect('/');
     
     }
 }

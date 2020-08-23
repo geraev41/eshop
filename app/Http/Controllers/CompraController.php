@@ -21,6 +21,7 @@ class CompraController extends Controller
                 $this->guardar_compra($p,$c); 
                 $c->delete(); 
             }
+            return redirect()->route('cliente'); 
         }else{
             return redirect()->route('cliente'); 
         }

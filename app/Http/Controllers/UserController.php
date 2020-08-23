@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App; 
+use Auth;
 
 class UserController extends Controller
 {
@@ -12,6 +13,14 @@ class UserController extends Controller
     }
 
     public function index(){
+        if(Auth::check()){
+            $user = Auth::user();
+            if($user->tipo == "cl"){
+                return redirect()->route('cliente');
+            }elseif($user->tipo == "ad"){
+                return redirect()->route('admin');
+            }
+        }
         return view('login');
     }
 

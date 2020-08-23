@@ -16,9 +16,9 @@
             ->nombre}} </label>  
             <br>
             <ul class="menu-list"> 
-                <li><a id="aList" href="ver_categorias#divProductos" >Productos</a></li> 
-                <li><a id="aList" href="productos_en_carro#divCarrito" >Mi carrito</a></li> 
-                <li><a id="aList" href="ver_compras#divCompras" >Mis compras</a></li>
+                <li><a id="aList" href="{{ route('mostrar_categorias','principal')}}#divProductos" >Productos</a></li> 
+                <li><a id="aList" href="{{ route('ver_productos')}}#divCarrito" >Mi carrito</a></li> 
+                <li><a id="aList" href="{{ route('ver_compras')}}#divCompras" >Mis compras</a></li>
             <ul>
             <form action="{{ route('salir')}}" method="POST"> 
                 @csrf
@@ -27,7 +27,7 @@
         </div>
         <div id="divRight">
             <div id="divProductos">
-                <a href="{{ route('mostrar_categorias')}}">Todas las categorias</a>
+                <a href="{{ route('mostrar_categorias','principal')}}">Todas las categorias</a>
             <br> 
                 <div class="field" style="margin-left:25%;">
                     <div class="control">
