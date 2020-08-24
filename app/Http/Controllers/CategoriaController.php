@@ -11,11 +11,16 @@ class CategoriaController extends Controller
         $this->middleware('auth'); 
     }
 
-
+    /**
+     * Retorna una vista donde se crean categorias 
+     */
     public function crear(){
         return view('categoria');
     }
-
+    /**
+     * @param r el request donde se obtienen los datos
+     * guarda una categoria
+     */
     public function guardar(Request $r){
         $r->validate([
             'categoria'=>'required'
@@ -26,12 +31,18 @@ class CategoriaController extends Controller
         return back()->with('mensaje','Categoria guardada con exitó'); 
     }
 
+    /**
+     * @param view nombre de la vista a la que va retornar los datos
+     */
     public function mostrar_categorias($view){
         $categorias = App\Categoria::all();
         $result = compact('categorias');
         return view($view, compact('result')); 
     }
-
+    /**
+     * @param id de la categoria a editar
+     * edita los datos de una categoria
+     */
     public function editar_categoria($id){
         $cat = App\Categoria::findOrFail($id);
         return view ('categoria_editar', compact('cat')); 
@@ -45,7 +56,10 @@ class CategoriaController extends Controller
        // return back();
        return view('admin', compact('msj')); 
     }
-
+    /**
+     * @param id de la categoria a eliminar
+     * elimina una categoria
+     */
     public function eliminar_categoria($id){
         $cat = App\Categoria::findOrFail($id);
         $pr = App\Producto::where('id_categoria', $id)->get();
@@ -57,10 +71,5 @@ class CategoriaController extends Controller
             $msj = "Eliminado con exitó";
         }
         return view('admin',compact('msj')); 
-    }
-
-    public function output(Request $r){
-        $id = intval($r->input('select'));
-        var_dump($id);die;
     }
 }
