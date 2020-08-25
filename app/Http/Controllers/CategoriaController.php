@@ -34,7 +34,10 @@ class CategoriaController extends Controller
     /**
      * @param view nombre de la vista a la que va retornar los datos
      */
-    public function mostrar_categorias($view){
+    public function mostrar_categorias($view=0){
+        if($view === 0){
+            return redirect('/');
+        }
         $categorias = App\Categoria::all();
         $result = compact('categorias');
         return view($view, compact('result')); 

@@ -84,13 +84,13 @@ class CompraController extends Controller
     /**
      * Hace un calculo de las ganancias obtenidas por las compras de los clientes
      */
-    public function ganacias(){
+    public function ganancias(){
         $compras = App\Compra::all();
         $total = 0;
         foreach($compras as $c){
             $total = $total + $c->costo; 
         }
-        return $total; 
+        return view('admin', compact('total')); 
     }
 }
  

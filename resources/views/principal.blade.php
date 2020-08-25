@@ -14,6 +14,12 @@
         <div id="divLeft"><br>
             <label> {{ Auth::user()
             ->nombre}} </label>  
+             @if (!empty ($msj))
+             <div id="note"class="notification is-success" style="top:3%; height: 5%; font-size: 80%; 
+              padding-top: 5%">
+                 {{$msj }}
+             </div>
+            @endif
             <br>
             <ul class="menu-list"> 
                 <li><a id="aList" href="{{ route('mostrar_categorias','principal')}}#divProductos" >Productos</a></li> 
@@ -95,7 +101,7 @@
                                     <td>{{$p->descripcion}}</td>
                                     <td><img src='images/{{ $p->imagen }}'/></td>
                                     <td>{{ $p->stock}}</td>
-                                    <td> {{ $p->precio}}</td>
+                                    <td> ₡{{ $p->precio}}</td>
                                     @foreach ($result['carro'] as $c)
                                         @if ($c->id_producto == $p->id)
                                             <td> {{ $c->cantidad }}</td>
@@ -179,6 +185,9 @@
         </div>
     </div>
 </section>
+<script>
+    $('#note').fadeOut(4000);
+</script>
 </body>
 </html>
 

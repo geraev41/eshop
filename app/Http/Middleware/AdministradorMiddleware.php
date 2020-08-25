@@ -16,10 +16,9 @@ class AdministradorMiddleware
      */
     public function handle($request, Closure $next)
     {
-    if(Auth::check() && Auth::user()->tipo == "ad"){
-        return $next($request);
-    }
-    return redirect('/'); 
-
+        if(Auth::check() && Auth::user()->tipo == "ad"){
+            return $next($request);
+        }
+        return redirect('/'); 
     }
 }

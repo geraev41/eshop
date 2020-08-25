@@ -24,8 +24,8 @@
                     <img style="margin-left:35%;" src="../Imagenes/category.png">
                     <div class="column is-half is-offset-one-quarter">
                     <input type="text" class="input is-primary" placeholder="Nombre categoria" name="categoria"><br><br>
-                        <a href ="{{ route('admin')}}"style="margin-left:10%;"  class="button is-info d-inline" >Regresar</a>
-                    <input  style="margin-left:10%;"type="submit" class="button is-success" value="Guardar">
+                    <a href ="{{ route('admin')}}"style="margin-left:10%;"  class="button is-info d-inline" >Regresar</a>
+                    <input  style="margin-left:10%;" type="submit" class="button is-success" value="Guardar">
                     </div>
                 </div>
             </div>

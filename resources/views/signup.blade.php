@@ -15,7 +15,14 @@
                 <div class="columns"> 
                     <div class="column">
                         <div class="column is-half
-                is-offset-one-quarter">
+                        is-offset-one-quarter">
+                        @error('username')
+                            <div id="note" class="notification is-danger" style="top:3%; height: 5%; font-size: 80%; 
+                            text-align: center; padding-top: 1%">
+                                <button class="delete"></button>
+                                Ya existe un usuario registrado con este nombre de usuario
+                            </div>
+                        @enderror
                              <input REQUIRED class="input is-primary" type="text" placeholder="Nombre"  name="nombre"><br><br>
                              <input REQUIRED class="input is-primary" type="text" placeholder="Cedula"  name="cedula"><br><br>
                              <input REQUIRED  class="input is-primary" type="text" placeholder="Correo Eletronico"  name="email"><br><br>
@@ -33,6 +40,9 @@
             </div>
         </form>
     </section> 
+    <script>
+        $('#note').fadeOut(4000);
+    </script>
 </body>
 </html>
 <?php

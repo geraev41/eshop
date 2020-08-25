@@ -22,7 +22,7 @@
                     
                     <div id="id_text"> 
                         <label >Producto comprado:  {{ $compra->nombre}}</label><br><br>
-                        <label >Fecha de Compra:    {{ $compra->fecha_compra}} </label><br><br>
+                        <label >Fecha de Compra:    {{ $compra->created_at->toFormattedDateString()}} </label><br><br>
                         <label >Cantidad comprada:  {{ $compra->cantidad}} </label><br><br>
                         <label >Valor por unidad:  ₡{{ $compra->precio}}</label><br><br>
                         <label >Total pagado:      ₡{{ $compra->costo}}</label><br><br>

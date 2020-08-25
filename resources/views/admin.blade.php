@@ -24,10 +24,9 @@
                     <label></label>
                     <ul class="menu-list"> 
                         <li><a id="aList" href="{{ route('mostrar_categorias','admin')}}#divCategorias ">Categorias</a> </li>
-                        <li><a id="aList" href="#divProductos" >Productos</a></li>
+                        <li><a id="aList" href="{{ route('mostrar_categorias','admin')}}#divProductos" >Productos</a></li>
                         <li><a id="aList" href="/ver_clientes#divClientes" >Clientes</a></li>
-                        <li><a id="aList" href="#divGanancias" >Mis ganancias</a></li>
-
+                        <li><a id="aList" href="{{ route('ganancias') }}#divGanancias" >Mis ganancias</a></li>
                     <ul>
                         <form action="{{ route('salir')}}" method="POST"> 
                             @csrf
@@ -53,13 +52,13 @@
                                         <tr>
                                             <td>{{$c->nombre}}</td> 
                                             <td><a href="{{ route('producto',$c->id) }}">Agregar producto</a></td>                                        
-                                            <td><a href="{{ route('editar_categoria',$c) }}">Editar</a></td>  
+                                            <td><a class="button is-success is-active is-small" href="{{ route('editar_categoria',$c) }}">Editar</a></td>  
                                                                                   
                                             <td>
                                                 <form action="{{ route ('eliminar_categoria',$c)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="" type="submit">Eliminar</button>
+                                                    <button class="button is-small is-danger is-active" class="" type="submit">Eliminar</button>
                                                 </form>
                                             </td>                                        
                                         </tr>
@@ -74,7 +73,7 @@
                         <div class="field">
                             <div class="control">
                                 <div class="select is-info ">
-                                <form method="POST" action="{{route('cargar_producto')}}">
+                                <form method="POST" action="{{route('cargar_producto')}}#divProductos">
                                     @csrf
                                 <input type="text" name="view" value="admin" style="display: none;">
 
@@ -110,14 +109,14 @@
                                             <td>{{$p->nombre}}</td> 
                                             <td>{{$p->descripcion}}</td>
                                             <td>{{$p->stock}}</td> 
-                                            <td>{{$p->precio}}</td> 
+                                            <td>₡{{$p->precio}}</td> 
                                             <td>{{$p->vendidos}}</td> 
-                                            <td><a href="{{ route('editar_producto',$p->id)}}">Editar</a></td>  
+                                            <td><a class="button is-success is-active is-small" href="{{ route('editar_producto',$p->id)}}">Editar</a></td>  
                                             <td>
                                                 <form action="{{ route ('eliminar_producto',$p)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="" type="submit">Eliminar</button>
+                                                    <button class="button is-small is-danger is-active" type="submit">Eliminar</button>
                                                 </form>
                                             </td>                                        
                                         </tr>
@@ -149,11 +148,10 @@
                         </table>
                     </div>
                     <div id="divGanancias">
-
                        <strong> Sus ganancias por todas las ventas </strong>  
-                           <?php
-                            //ganancias
-                            ?>
+                        @if(!empty($total))
+                            <strong>₡{{$total}}</strong>
+                        @endif
                     </div>
                 </div>
             </div>

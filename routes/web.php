@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
 Route::get('/','UserController@index')->name('login'); 
+
+Route::get('/Registro', 'UserController@registro')->name('registro_usuario'); 
+Route::post('/Salvar', 'UserController@guardar')->name('guardar'); 
+
 Route::get('/registro','UserController@registro')->name('registro'); 
 
 Route::post('/validar','Auth\LoginController@login')->name('validar_login'); 
@@ -45,7 +47,6 @@ Route::delete('/eliminar_producto/{id?}', 'ProductoController@eliminar')->name('
 Route::get('/editar_producto/{id?}', 'ProductoController@editar_producto')->name('editar_producto')->middleware('admin');
 Route::put('/update_producto/{id?}', 'ProductoController@update')->name('update_producto')->middleware('admin');
 
-//Route::post('/cw/{id?}', 'CategoriaController@output')->name('consola'); 
 
 Route::get('/agregar/{id?}', 'CarroController@guardar_producto_en_carro')->name('agregar_producto')->middleware('cliente'); 
 Route::delete('/eliminar_de_carro/{id?}', 'CarroController@eliminar_producto_en_carro')->name('eliminar_pr_carro')->middleware('cliente'); 
@@ -59,16 +60,14 @@ Route::get('/ver_compras', 'CompraController@mostrar_compras')->name('ver_compra
 Route::get('/ver_orden/{id?}', 'CompraController@mostrar_orden')->name('ver_orden')->middleware('cliente'); 
 Route::post('/ver_orde_fecha', 'CompraController@ver_orden_x_fecha')->name('buscar_fecha')->middleware('cliente'); 
 Route::delete('/eliminar_compra/{id?}', 'CompraController@eliminar_compra')->name('eliminar_compra')->middleware('cliente'); 
+Route::get('/ganancias', 'CompraController@ganancias')->name('ganancias')->middleware('admin'); 
 
 
 
 
 
 
-Route::get('/Registro', 'UserController@registro')->name('registro_usuario'); 
-
-Route::post('/Salvar', 'UserController@guardar')->name('guardar'); 
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
