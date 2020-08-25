@@ -10,7 +10,10 @@ class CarroController extends Controller
     public function __construct(){
         $this->middleware('auth'); 
     }
-
+    /**
+     * @param id del carro 
+     * retorna producto de carro
+     */
     public function cambiar($id= 0){
         if($id<1){
             return redirect()->route('cliente');
@@ -21,6 +24,10 @@ class CarroController extends Controller
         return view('cantidad_requerida', compact('result')); 
     }
 
+    /**
+     * @param id_producto del que va a h¿guardar en el carro
+     * añade un producto en el carro del usuario
+     */
     public function guardar_producto_en_carro($id_producto){
         $c = new App\Carro;
         $p =  App\Producto::findOrFail($id_producto);
@@ -34,6 +41,10 @@ class CarroController extends Controller
      //   return view('principal', compact('msj')); 
     }
 
+    /**
+     * @param r request recibido
+     * @param id id del carro al que se le va modificar los datos
+     */
     public function update(Request $r, $id=0){
         $c = App\Carro::findOrFail($id); 
         $p =  App\Producto::findOrFail($c->id_producto);
@@ -45,15 +56,20 @@ class CarroController extends Controller
       //  return view('principal', compact('msj')); 
     }
 
+    /**
+     * @param id del carro del que se va eliminar
+     */
     public function eliminar_producto_en_carro($id){
         $p = App\Carro::findOrFail($id);
         $p->delete(); 
         $msj = "Eliminado producto de carro";
         return redirect()->route('cliente');
-
        // return view('principal', compact('msj')); 
     }
 
+    /**
+     * Muestra los productos que estan en el carro
+     */
     public function productos_en_carro(){
         $carro= App\Carro::where('id_usuario', Auth::user()->id)->get();
         $pros = array();
@@ -65,5 +81,4 @@ class CarroController extends Controller
         return view('principal', compact('result')); 
     }
 
-   
 }

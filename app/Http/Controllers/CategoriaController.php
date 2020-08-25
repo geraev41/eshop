@@ -51,6 +51,10 @@ class CategoriaController extends Controller
         return view ('categoria_editar', compact('cat')); 
     }
 
+    /**
+     * @param r request recibido
+     * @param id de la categoria a modificar
+     */
     public function update(Request $r, $id){
         $notaUpdate = App\Categoria::findOrFail($id);
         $notaUpdate->nombre = $r->categoria; 

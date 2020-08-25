@@ -11,7 +11,9 @@ class UserController extends Controller
     public function __construct(){
       //  $this->middleware('auth'); 
     }
-
+    /***
+     * Muestra el index principal del usuario respectivo
+     */
     public function index(){
         if(Auth::check()){
             $user = Auth::user();
@@ -23,7 +25,9 @@ class UserController extends Controller
         }
         return view('login');
     }
-
+    /** 
+     * Devuelve el registro de usuarios
+     * */ 
     public function registro(){
         return view('signup'); 
     }
@@ -50,14 +54,21 @@ class UserController extends Controller
     //     $nuevoUser->tipo = "cl";
     //     $nuevoUser->save(); 
     // }
-
+    /**
+     * Devuelve la vista admin
+     */
     public function admin(){
         return view('admin');
     }
-
+    /**
+     * Devuelve la vista cliente
+     */
     public function cliente(){
         return view('principal');
     }
+    /**
+     * Muestra los clientes del sistema al administrador
+     */
     public function mostrar_clientes(){
         $users = App\User::where('tipo','cl')->get();
         return view('admin', compact('users')); 
