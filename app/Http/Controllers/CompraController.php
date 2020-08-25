@@ -29,7 +29,7 @@ class CompraController extends Controller
         }
     }
     /**
-     *  @param $p producto a cancelar
+     * @param $p producto a cancelar
      * @param $car carrito con los productos y datis
      * Guarda la compra que se va a cancelar
      */
